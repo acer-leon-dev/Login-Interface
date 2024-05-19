@@ -25,6 +25,7 @@ std::unordered_map<std::string, User> users = {
     { "big_pig333",     {"big_pig333", "nullpassword", "biggypiggy@lifejacket.org"} },
     { "1stack2grass3",  {"1stack2grass3", "nullpassword", "cowseatgrass@lifejacket.org"} },
     { "healthyhippo",   {"healthyhippo", "nullpassword", "hungryhippo@lifejacket.org"} },
+    { "cupcakedestroyerofworlds", {"cupcakedestroyerofworlds", "1234five", "youremom@yadig.net"} }
 };
 
 void user_signup() {
@@ -198,10 +199,58 @@ void change_password() {
                     }
                     else {
                         users[current_account].password = new_password;
+                        std::cout << "Your password has been changed! Please log in again." << std::endl;
+                        current_account = "";
                         break;
                     }
                 }
             }
+        }
+    }
+}
+
+void change_username() {
+    if (users.find(current_account) != users.end()) {
+        while (true) {
+            std::string password;
+            std::cout << "Enter your password: "; getline(std::cin, password); std::cout << std::endl;
+
+            if (password != users[current_account].password) {
+                std::cout << "That is not your password!" << std::endl;
+                continue;
+            }
+
+            while (true)
+            {
+                std::string new_username;
+                std::cout << "New username: "; std::getline(std::cin, new_username);
+                size_t invalidusernamecharacters = new_username.find_first_of(" ~`!@#$%^&*()-+=[]{}\\|;:'\",.<>/?");
+                if (invalidusernamecharacters != std::string::npos) // Contains any of the characters in invalidusernamecharacters
+                {
+                    std::cout << "Your username cannot only contain alphanumeric characters, hyphens and underscores!" << std::endl;
+                    continue;
+                }
+                else if (new_username.size() < 3 || new_username.size() > 25) // Shorter than 3 or longer than 25 characters
+                {
+                    std::cout << "Your username cannot be fewer than 3 or greater than 25 characters!" << std::endl;
+                    continue;
+                }
+                else if (new_username.empty()) // Contains nothing
+                {
+                    std::cout << "Invalid username!" << std::endl;
+                    continue;
+                }
+                else
+                {
+                    std::pair<std::string, User> replacement_user(new_username, { new_username, users[current_account].password, users[current_account].email });
+                    users.insert(replacement_user);
+                    users.erase(current_account);
+                    current_account = new_username;
+                    std::cout << "Your username is now \"" << users[current_account].username << "\"!" << std::endl;
+                    break;
+                }
+            }
+            break;
         }
     }
 }
