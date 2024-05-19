@@ -1,0 +1,8 @@
+command			:	function()
+****************************************
+signup			:	user_signup()
+login			:	user_login()	
+signout			:	user_signout()
+changepassword	:	change_password()
+accounts		:	accounts()
+end				:	return 0
