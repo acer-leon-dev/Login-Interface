@@ -1,5 +1,5 @@
 COMMANDS
-- accounts = Shows a list of all users in the database (if admin).
+- accounts - Shows a list of all users in the database (if admin).
 - signup - Creates a new account.
 - login - Logs into an existing account.
 - signout -	Signs out of the current account.
