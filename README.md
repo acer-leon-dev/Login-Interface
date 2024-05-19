@@ -7,7 +7,7 @@ information such as usernames, emails and passwords. Passwords can be changed.
 
 Commands are listed in "commands.md"
 
-HOW TO USE:
--Download "Login Interface.exe"
+HOW TO INSTALL AND RUN:
+-Install "Login Interface.exe"
 -Run "Login Interface.exe"
 -Use the commands in "commands.md"
